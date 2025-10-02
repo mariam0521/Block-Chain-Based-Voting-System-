@@ -198,7 +198,7 @@ Here are a few screenshots
 
 ##### 1. Posting vote
 
-![image.png](https://github.com/adhikarir/E-voting-system-using-blockchain-and-python/blob/master/screenshots/1.png)
+![image.png](https://github.com/mariam0521/Block-Chain-Based-Voting-System-/blob/156d1f8ce9845a0cb11e62b910a5aaab01769702/result.jpg)
 
 ##### 2. Requesting the node to mine
 
