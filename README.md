@@ -202,19 +202,21 @@ Here are a few screenshots
 
 ##### 2. Requesting the node to mine
 
-![image.png](https://github.com/adhikarir/E-voting-system-using-blockchain-and-python/blob/master/screenshots/2.png)
+![image.png](https://github.com/mariam0521/Block-Chain-Based-Voting-System-/blob/764194a2573c936ee0c81c4607f4ef88c8994ff8/result3.jpg)
 
 ##### 3. Resyncing with the chain for updated data
 
-![image.png](https://github.com/adhikarir/E-voting-system-using-blockchain-and-python/blob/master/screenshots/3.png)
+![image.png](https://github.com/mariam0521/Block-Chain-Based-Voting-System-/blob/764194a2573c936ee0c81c4607f4ef88c8994ff8/result4.jpg)
 
 ##### 4. Chain of the transaction
 
-![image.png](https://github.com/adhikarir/E-voting-system-using-blockchain-and-python/blob/master/screenshots/4.png)
+![image.png](https://github.com/mariam0521/Block-Chain-Based-Voting-System-/blob/764194a2573c936ee0c81c4607f4ef88c8994ff8/reult5.jpg)
 
 ##### 5. App screenshot
 
-![image.png](https://github.com/adhikarir/E-voting-system-using-blockchain-and-python/blob/master/screenshots/5.png)
+![image.png](https://github.com/mariam0521/Block-Chain-Based-Voting-System-/blob/764194a2573c936ee0c81c4607f4ef88c8994ff8/result6.jpg)
+
+![image.png](https://github.com/mariam0521/Block-Chain-Based-Voting-System-/blob/764194a2573c936ee0c81c4607f4ef88c8994ff8/result7.jpg)
 
 To play around by spinning off multiple custom nodes, use the `register_with/` endpoint to register a new node. 
 
