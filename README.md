@@ -54,8 +54,10 @@ A secure and transparent Blockchain-Based Voting System that ensures integrity, 
 
     pip install -r requirements.txt
 
-   3. Run the Application
+  3.Run the Application
+
     python app.py
+
     python service.py
 
 
