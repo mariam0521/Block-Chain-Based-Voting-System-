@@ -196,23 +196,26 @@ The application should be up and running at [http://localhost:5000](http://local
 
 Here are a few screenshots
 
-##### 1. Posting vote
+
 
 ![image.png](https://github.com/mariam0521/Block-Chain-Based-Voting-System-/blob/156d1f8ce9845a0cb11e62b910a5aaab01769702/result.jpg)
 
-##### 2. Requesting the node to mine
+
+![image.png](https://github.com/mariam0521/Block-Chain-Based-Voting-System-/blob/764194a2573c936ee0c81c4607f4ef88c8994ff8/result2.jpg?raw=true)
+
+
 
 ![image.png](https://github.com/mariam0521/Block-Chain-Based-Voting-System-/blob/764194a2573c936ee0c81c4607f4ef88c8994ff8/result3.jpg)
 
-##### 3. Resyncing with the chain for updated data
+
 
 ![image.png](https://github.com/mariam0521/Block-Chain-Based-Voting-System-/blob/764194a2573c936ee0c81c4607f4ef88c8994ff8/result4.jpg)
 
-##### 4. Chain of the transaction
+
 
 ![image.png](https://github.com/mariam0521/Block-Chain-Based-Voting-System-/blob/764194a2573c936ee0c81c4607f4ef88c8994ff8/reult5.jpg)
 
-##### 5. App screenshot
+
 
 ![image.png](https://github.com/mariam0521/Block-Chain-Based-Voting-System-/blob/764194a2573c936ee0c81c4607f4ef88c8994ff8/result6.jpg)
 
