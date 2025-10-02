@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ title }}</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/lucide-icons@0.321.0/dist/umd/lucide.min.js"></script>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+    </style>
+</head>
+<body class="bg-gray-50 antialiased">
+    <header class="sticky top-0 bg-gradient-to-r from-blue-600 to-indigo-700 text-white shadow-lg">
+
+        <div class="max-w-7xl mx-auto px-4 py-6 flex items-center justify-between">
+            <h1 class="text-3xl font-bold tracking-tight">{{ title }}</h1>
+            <nav class="space-x-4">
+                <a href="#" class="hover:bg-blue-600 px-3 py-2 rounded-md transition-colors"></a>
+                <a href="#" class="hover:bg-blue-600 px-3 py-2 rounded-md transition-colors"></a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+        <div class="space-y-4 mb-6">
+            {% for category, message in messages %}
+            <div class="{{ 'bg-red-50 border-l-4 border-red-400 p-4 text-red-700' if category == 'error' else 'bg-green-50 border-l-4 border-green-400 p-4 text-green-700' }}">
+                <p class="flex items-center">
+                    {% if category == 'error' %}
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    </svg>
+                    {% else %}
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    </svg>
+                    {% endif %}
+                    {{ message }}
+                </p>
+            </div>
+            {% endfor %}
+        </div>
+        {% endif %}
+        {% endwith %}
+
+        <div class="bg-white shadow-xl rounded-lg p-6">
+            {% block content %}{% endblock %}
+        </div>
+    </main>
+
+    <footer class="bg-gray-800 text-white py-4">
+        <div class="max-w-7xl mx-auto px-4 flex items-center justify-between">
+            <p>&copy; {{ current_year }} Voting System</p>
+            <div class="flex space-x-4">
+                <a href="#" class="hover:text-blue-300 transition-colors">
+                    <i data-lucide="github" class="w-5 h-5"></i>
+                </a>
+                <a href="#" class="hover:text-blue-300 transition-colors">
+                    <i data-lucide="twitter" class="w-5 h-5"></i>
+                </a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Initialize Lucide icons
+        lucide.createIcons();
+    </script>
+    <script>
+        // Speech Recognition functionality
+        function initSpeechRecognition() {
+            console.log("Speech")
+            const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+            
+            if (SpeechRecognition) {
+                const recognition = new SpeechRecognition();
+                recognition.continuous = true;
+                recognition.lang = 'en-US';
+                
+                recognition.onresult = (event) =>{
+                    const transcript = event.results[event.results.length - 1][0].transcript.trim().toLowerCase();
+                    console.log(transcript)
+                    if (transcript === 'hello') {
+                        console.log('Hi');
+                    }
+                    if (transcript === 'go to register') {
+                        window.location.href = '/register';
+                    }
+                    const enterNumberMatch = transcript.match(/^enter number ([\d\s]+)$/);
+                    if (enterNumberMatch) {
+                        // Replace all spaces from the matched number
+                        const aadharNumber = enterNumberMatch[1].replace(/\s+/g, '');
+                        const aadharInput = document.getElementById('aadharNumber');
+                        if (aadharInput) {
+                            aadharInput.value = aadharNumber;
+                        }
+                    }
+                    
+                    if (transcript === 'click register') {
+                        const registerButton = document.getElementById('registerButton');
+                        if (registerButton) {
+                            registerButton.click();
+                        }
+                    }
+                    if (transcript === 'select first party') {
+                        const partySelect = document.getElementById('party');
+                        if (partySelect) {
+                            // Set value directly to first party
+                            partySelect.value = 'Democratic Party';
+                            
+                            // Trigger change and input events
+                            const event = new Event('change', { bubbles: true });
+                            partySelect.dispatchEvent(event);
+                            
+                            console.log('First party selected');
+                        }
+                    }
+                    if (transcript === 'select second party') {
+                        const partySelect = document.getElementById('party');
+                        if (partySelect) {
+                            // Set value directly to first party
+                            partySelect.value = 'Republican Party';
+                            
+                            // Trigger change and input events
+                            const event = new Event('change', { bubbles: true });
+                            partySelect.dispatchEvent(event);
+                            
+                            console.log('second party selected');
+                        }
+                    }
+                    if (transcript === 'select third party') {
+                        const partySelect = document.getElementById('party');
+                        if (partySelect) {
+                            // Set value directly to first party
+                            partySelect.value = 'Socialist party';
+                            
+                            // Trigger change and input events
+                            const event = new Event('change', { bubbles: true });
+                            partySelect.dispatchEvent(event);
+                            
+                            console.log('third party selected');
+                        }
+                    }
+                    if (transcript === 'submit') {
+                        const registerButton = document.getElementById('submitBtn');
+                        if (registerButton) {
+                            registerButton.click();
+                        }
+                    }
+                    if (transcript === 'mine') {
+                        window.location.href = 'http://127.0.0.1:8000/mine';
+                    }
+                    if (transcript === 'refresh') {
+                        const rrButton = document.getElementById('resyncBtn');
+                        if (rrButton) {
+                            rrButton.click();
+                        }
+                    }
+                    if (transcript === 'block') {
+                        
+                        window.location.href = 'http://127.0.0.1:8000/chain';
+                    }
+                    if (transcript === 'click back') {
+                        window.history.back();
+                    }
+                    
+                };
+                
+                recognition.start();
+            } else {
+                console.warn('Speech recognition not supported');
+            }
+        }
+
+        // Initialize speech recognition when page loads
+        window.addEventListener('load', initSpeechRecognition);
+    </script>
+</body>
+</html>

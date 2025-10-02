@@ -1,0 +1,262 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container mx-auto px-4 py-8">
+    <div class="grid md:grid-cols-12 gap-6">
+        <!-- Voting Form Section -->
+        <div class="md:col-span-8 space-y-6">
+            <div class="bg-white shadow-xl rounded-lg p-6">
+                <h2 class="text-2xl font-bold text-gray-800 mb-4">Cast Your Vote</h2>
+                <form action="/submit" id="votingForm" method="post" class="space-y-4">
+                    <div>
+                        <label for="party" class="block text-sm font-medium text-gray-700 mb-2">Select Political Party</label>
+                        <select name="party" id="party" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" required>
+                            <option value="">Choose a Party</option>
+                            {% for party in political_parties %}
+                            <option value="{{ party }}">{{ party }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+
+                    <div>
+                        <label for="aadhar_number" class="block text-sm font-medium text-gray-700 mb-2">Aadhar Number</label>
+                        <input type="text" id="aadhar_number" name="aadhar_number" 
+                               class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" 
+                               placeholder="Enter 12-digit Aadhar Number" 
+                               required pattern="\d{12}" maxlength="12" minlength="12">
+                    </div>
+
+                    <div class="text-center">
+                        <h3 class="text-lg font-semibold text-gray-700 mb-4">Face Verification</h3>
+                        <div class="border-2 border-gray-200 rounded-lg overflow-hidden mb-4">
+                            <img id="videoFeed" src="{{ url_for('video_feed') }}" class="w-full h-auto">
+                        </div>
+                        <p class="text-sm text-gray-600">
+                            <strong>Instructions:</strong> Look directly at the camera and remain still
+                        </p>
+                    </div>
+
+                    <div class="text-center">
+                        <button type="submit" class="bg-blue-600 text-white px-6 py-2 rounded-md hover:bg-blue-700 transition-colors" id="submitBtn">
+                            Submit Vote
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <!-- Navigation Section -->
+        <div class="md:col-span-4">
+            <div class="bg-white shadow-xl rounded-lg p-6">
+                <h3 class="text-xl font-semibold text-gray-800 mb-4">Quick Links</h3>
+                <nav class="space-y-2">
+                    <a href="/register" class="block text-blue-600 hover:text-blue-800 hover:underline">
+                        Voter Registration
+                    </a>
+                </nav>
+            </div>
+        </div>
+    </div>
+
+    <!-- Blockchain Actions -->
+    <div class="flex justify-center space-x-4 my-6">
+        <a href="{{node_address}}/mine" target="_blank" class="bg-green-500 text-white px-4 py-2 rounded-md hover:bg-green-600" id="mineBlock"> 
+            Mine Block
+        </a>
+        <a href="/" class="bg-yellow-500 text-white px-4 py-2 rounded-md hover:bg-yellow-600" id="resyncBtn">
+            Resync
+        </a>
+        <a href="{{node_address}}/chain" target="_blank" class="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600" id="blockChainBtn">
+            View Blockchain
+        </a>
+    </div>
+
+    <!-- Results Section -->
+    <div class="grid md:grid-cols-12 gap-6">
+        <!-- Voting Results Detail -->
+        <div class="md:col-span-8">
+            <div class="bg-white shadow-xl rounded-lg p-6">
+                <h2 class="text-2xl font-bold text-gray-800 mb-4">Voting Results</h2>
+                <div class="overflow-x-auto">
+                    <table class="w-full">
+                        <thead>
+                            <tr class="bg-blue-100 text-blue-800">
+                                <th class="px-4 py-2 text-left">Voter ID</th>
+                                <th class="px-4 py-2 text-left">Political Party</th>
+                                <th class="px-4 py-2 text-left">Timestamp</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for post in posts %}
+                            <tr class="border-b hover:bg-gray-50">
+                                <td class="px-4 py-2">{{post.voter_id}}</td>
+                                <td class="px-4 py-2">{{post.party}}</td>
+                                <td class="px-4 py-2">{{readable_time(post.timestamp)}}</td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <!-- Results Summary and Charts -->
+        <div class="md:col-span-12">
+            <div class="bg-white shadow-xl rounded-lg p-6">
+                <h2 class="text-2xl font-bold text-gray-800 mb-4">Vote Summary</h2>
+                <!-- Vote Summary Table -->
+                <div class="mb-8">
+                    <table class="w-full">
+                        <thead>
+                            <tr class="bg-blue-100 text-blue-800">
+                                <th class="px-4 py-2 text-left">Party</th>
+                                <th class="px-4 py-2 text-left">Total Votes</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for p in political_parties %}
+                            <tr class="border-b hover:bg-gray-50">
+                                <td class="px-4 py-2">{{ p }}</td>
+                                <td class="px-4 py-2">{{ vote_gain.count(p) }}</td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- Charts Section -->
+                <div class="grid md:grid-cols-2 gap-8">
+                    <div class="bg-white p-4 rounded-lg shadow h-80">
+                        <canvas id="barChart"></canvas>
+                    </div>
+                    <div class="bg-white p-4 rounded-lg shadow h-80">
+                        <canvas id="pieChart"></canvas>
+                    </div>
+                    <div class="md:col-span-2 bg-white p-4 rounded-lg shadow h-80">
+                        <canvas id="lineChart"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- External Libraries -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    try {
+        const politicalParties = JSON.parse('{{ political_parties | tojson | safe }}');
+        const voteGain = JSON.parse('{{ vote_gain | tojson | safe }}');
+        const voteCounts = politicalParties.map(party => 
+            voteGain.filter(vote => vote === party).length
+        );
+
+        const colors = [
+            'rgba(255, 99, 132, 0.8)',
+            'rgba(54, 162, 235, 0.8)',
+            'rgba(255, 206, 86, 0.8)',
+            'rgba(75, 192, 192, 0.8)',
+            'rgba(153, 102, 255, 0.8)'
+        ];
+
+        // Bar Chart
+        new Chart(document.getElementById('barChart'), {
+            type: 'bar',
+            data: {
+                labels: politicalParties,
+                datasets: [{
+                    label: 'Votes per Party',
+                    data: voteCounts,
+                    backgroundColor: colors,
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    title: {
+                        display: true,
+                        text: 'Vote Distribution'
+                    },
+                    legend: {
+                        display: false
+                    }
+                },
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+
+        // Pie Chart
+        new Chart(document.getElementById('pieChart'), {
+            type: 'pie',
+            data: {
+                labels: politicalParties,
+                datasets: [{
+                    data: voteCounts,
+                    backgroundColor: colors
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    title: {
+                        display: true,
+                        text: 'Vote Share'
+                    },
+                    legend: {
+                        position: 'bottom'
+                    }
+                }
+            }
+        });
+
+        // Line Chart - Vote Percentage Trend
+        const totalVotes = voteCounts.reduce((a, b) => a + b, 0);
+        const votePercentages = voteCounts.map(count => (count / totalVotes) * 100);
+        
+        new Chart(document.getElementById('lineChart'), {
+            type: 'line',
+            data: {
+                labels: politicalParties,
+                datasets: [{
+                    label: 'Vote Percentage',
+                    data: votePercentages,
+                    borderColor: 'rgba(75, 192, 192, 1)',
+                    backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                    tension: 0.1,
+                    fill: true
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    title: {
+                        display: true,
+                        text: 'Vote Percentage Trend'
+                    }
+                },
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        ticks: {
+                            callback: value => value.toFixed(1) + '%'
+                        }
+                    }
+                }
+            }
+        });
+    } catch (error) {
+        console.error('Chart rendering error:', error);
+    }
+});
+</script>
+{% endblock %}
