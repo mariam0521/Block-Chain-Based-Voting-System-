@@ -1,4 +1,4 @@
-🗳️ #Blockchain-Based Voting System
+🗳️ # Blockchain-Based Voting System
 
 A secure and transparent Blockchain-Based Voting System that ensures integrity, anonymity, and immutability of election records. This project leverages blockchain technology to provide a reliable platform for conducting electronic voting with reduced risks of fraud and tampering.
 
