@@ -1,30 +1,30 @@
-🗳️ # Blockchain-Based Voting System
+ # Blockchain-Based Voting System
 
 A secure and transparent Blockchain-Based Voting System that ensures integrity, anonymity, and immutability of election records. This project leverages blockchain technology to provide a reliable platform for conducting electronic voting with reduced risks of fraud and tampering.
 
-🚀 #Features
+# Features
 
-🔐 Secure Voter Authentication – Users can register and log in with unique credentials.
+ Secure Voter Authentication – Users can register and log in with unique credentials.
 
-🗳️ Vote Casting – Easy-to-use interface for selecting and submitting votes.
+    🗳️ Vote Casting – Easy-to-use interface for selecting and submitting votes.
 
-🔒 Encryption with SHA-256 – Ensures votes remain anonymous and tamper-proof.
+    🔒 Encryption with SHA-256 – Ensures votes remain anonymous and tamper-proof.
 
-📦 Immutable Records – Votes are stored in blocks that are linked securely.
+    📦 Immutable Records – Votes are stored in blocks that are linked securely.
 
-🌍 Decentralization – Eliminates the need for a central authority.
+    🌍 Decentralization – Eliminates the need for a central authority.
 
-📊 Auditability – Results can be verified in real time without compromising voter privacy.
+    📊 Auditability – Results can be verified in real time without compromising voter privacy.
 
-🧑‍🦽 Accessibility – Voice command feature for users with disabilities.
+    🧑‍🦽 Accessibility – Voice command feature for users with disabilities.
 
-🏗️ #System Architecture
+# System Architecture
 
-The system consists of the following key modules:
+    The system consists of the following key modules:
 
-User Registration & Login – Handles voter identity securely.
+    User Registration & Login – Handles voter identity securely.
 
-Voting Module – Allows users to cast their votes.
+    Voting Module – Allows users to cast their votes.
 
 Blockchain Module – Stores votes in blocks linked with cryptographic hashing.
 
@@ -32,7 +32,7 @@ Results & Verification – Displays transparent results while ensuring anonymity
 
 Voice Command Module – Provides accessibility for differently-abled users.
 
-⚙️ #Technologies Used
+# Technologies Used
 
 Backend: Python (Flask / app.py & service.py)
 
@@ -44,7 +44,7 @@ Frontend: HTML, CSS, JavaScript
 
 Voice Commands: SpeechRecognition (Python library)
 
-📥 #Installation & Setup
+ # Installation & Setup
 1️⃣ Clone the Repository
 git clone https://github.com/your-username/blockchain-voting-system.git
 cd blockchain-voting-system
@@ -62,7 +62,7 @@ python service.py
 
 The app will start at http://127.0.0.1:5000/
 
-🧪#Experimental Results & Discussion
+# Experimental Results & Discussion
 
 The system successfully handled secure vote casting without data loss.
 
@@ -88,7 +88,7 @@ Votes are stored immutably.
 
 Results are tallied transparently.
 
-#Result Screen Shots:
+# Result Screen Shots:
 
 ![image.png](https://github.com/mariam0521/Block-Chain-Based-Voting-System-/blob/156d1f8ce9845a0cb11e62b910a5aaab01769702/result.jpg)
 
@@ -114,7 +114,7 @@ Results are tallied transparently.
 ![image.png](https://github.com/mariam0521/Block-Chain-Based-Voting-System-/blob/764194a2573c936ee0c81c4607f4ef88c8994ff8/result7.jpg)
 
 
-🔮# Future Enhancements
+# Future Enhancements
 
 Implementing smart contracts for automated validation.
 
@@ -126,14 +126,14 @@ Enhancing scalability to support millions of users.
 
 
 
-🤝 Contributing
+# Contributing
 
 Contributions are welcome! Please fork this repository and create a pull request.
 
-👨‍💻 Author
+# Author
 
-Developed by mariam and sana
-🎓 Final Year CSE Project | Blockchain & Cloud Enthusias
+Developed by mariam
+
 
 
 
